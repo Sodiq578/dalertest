@@ -1,256 +1,121 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="uz">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Pricing — MyVideo</title>
+  <meta charset="UTF-8">
+  <title>Date & Time Calendar</title>
+
   <style>
-    /* ===== Reset-ish ===== */
-    :root{
-      --bg:#0f1724;
-      --card:#0b1220;
-      --muted:#98a2b3;
-      --accent:#7c3aed;
-      --accent-2:#06b6d4;
-      --glass: rgba(255,255,255,0.03);
-      --white: #ffffff;
-      --radius:16px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg,#071021 0%, #051428 100%);
-      color:var(--white);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:48px 16px;
-    }
-    .wrap{max-width:1100px;margin:0 auto;}
-
-    h1{font-size:24px;margin:0 0 6px}
-    p.lead{color:var(--muted);margin:0 0 20px}
-
-    /* Toggle */
-    .toggle {
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      background:var(--glass);
-      padding:8px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,0.04);
-    }
-    .toggle button{
-      border:0;background:transparent;color:var(--muted);padding:6px 10px;border-radius:999px;cursor:pointer;
-      font-weight:600;
-    }
-    .toggle button.active{
-      background:linear-gradient(90deg,var(--accent),var(--accent-2));
-      color:white;
-      box-shadow: 0 6px 18px rgba(124,58,237,0.18);
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
     }
 
-    /* Grid */
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3,1fr);
-      gap:18px;
-      margin-top:22px;
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #4f46e5, #9333ea);
     }
 
-    @media (max-width:880px){
-      .grid{grid-template-columns:1fr; margin-top:18px}
-      body{padding:28px 12px}
+    .calendar-box {
+      width: 340px;
+      background: #fff;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
     }
 
-    /* Card */
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:var(--radius);
-      padding:20px;
-      border:1px solid rgba(255,255,255,0.04);
-      position:relative;
-      min-height:430px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #111827;
     }
-    .ribbon{
-      position:absolute;
-      right:14px;
-      top:14px;
-      font-size:12px;
-      background:var(--accent);
-      padding:6px 10px;
-      border-radius:999px;
-      color:#fff;
-      font-weight:700;
-      box-shadow:0 8px 24px rgba(124,58,237,0.14);
-    }
-    .card h3{margin:0 0 6px;font-size:18px}
-    .price{font-size:28px;margin:6px 0 12px;font-weight:700}
-    .price small{display:block;font-size:13px;color:var(--muted);font-weight:600}
-    .features{margin:12px 0 18px;padding:0;list-style:none;line-height:1.6;color:var(--muted);}
-    .features li{display:flex;gap:10px;align-items:flex-start}
-    .features svg{flex:0 0 20px;margin-top:2px;opacity:0.95}
-    .cta{
-      display:flex;
-      gap:10px;
-      margin-top:auto;
-      align-items:center;
-    }
-    .btn{
-      padding:10px 14px;border-radius:12px;border:0;cursor:pointer;font-weight:700;
-    }
-    .btn.primary{
-      background:linear-gradient(90deg,var(--accent),var(--accent-2));
-      color:white;
-      box-shadow:0 10px 30px rgba(6,182,212,0.08);
-    }
-    .btn.ghost{
-      background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.06);
-    }
-    .muted-note{font-size:13px;color:var(--muted);margin-top:10px}
 
-    /* Price badge */
-    .price-badge{display:inline-block;background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:10px;font-size:13px;color:var(--muted)}
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #374151;
+    }
 
-    /* subtle highlight for recommended plan */
-    .card.recommended{
-      transform:translateY(-6px);
-      box-shadow:0 20px 40px rgba(2,6,23,0.6), 0 8px 20px rgba(7,22,36,0.5);
-      border:1px solid rgba(124,58,237,0.18);
-    }/* small foot */
-    .foot{margin-top:18px;color:var(--muted);font-size:13px}
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      font-size: 16px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 2px rgba(99,102,241,0.3);
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 14px;
+      background: #f3f4f6;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: #6366f1;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #4f46e5;
+    }
   </style>
 </head>
 <body>
-  <div class="wrap" role="main">
-    <header>
-      <h1>Rejalashtirish — Narxlar va xususiyatlar</h1>
-      <p class="lead">Saytingiz uchun tushunarli va tez qaror qabul qilishga yordam beradigan pricing bloki. Narxlar oylik/yillik bo'yicha avtomatik yangilanadi.</p>
-      <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:12px">
-        <div class="toggle" aria-label="billing toggle">
-          <button id="monthlyBtn" class="active" aria-pressed="true">Monthly</button>
-          <button id="yearlyBtn" aria-pressed="false">Yearly (2 oy bepul)</button>
-        </div>
-        <div class="price-badge" id="currencyBadge">Narx: USD</div>
-      </div>
-    </header>
 
-    <section class="grid" aria-label="pricing plans">
-      <!-- Free -->
-      <article class="card" data-plan="free" aria-labelledby="plan-free">
-        <div>
-          <h3 id="plan-free">Free</h3>
-          <div class="price" data-monthly="0" data-yearly="0">
-            $0 <small>oyiga</small>
-          </div>
-          <p class="muted-note">Boshlang'ich reja — video yuklash, kanal yaratish.</p>
+  <div class="calendar-box">
+    <h2>Kalendar (Date & Time)</h2>
 
-          <ul class="features">
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span>Videolarni yuklash (maks 10 daqiqa)</span></li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span>Asosiy kanal sahifasi</span></li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3v18" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span>Reklama: ha (to'liq)</span></li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3v18" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span>Monetizatsiya: yo'q</span></li>
-          </ul>
-        </div>
+    <label>Sana tanlang</label>
+    <input type="date" id="date">
 
-        <div class="cta">
-          <button class="btn ghost" onclick="selectPlan('Free')">Ro'yxatdan o'tish</button>
-          <div style="margin-left:auto;text-align:right">
-            <div class="muted-note">Boshlash uchun</div>
-          </div>
-        </div>
-      </article>
+    <label>Vaqt tanlang</label>
+    <input type="time" id="time">
 
-      <!-- Creator (recommended) -->
-      <article class="card recommended" data-plan="creator" aria-labelledby="plan-creator">
-        <div>
-          <span class="ribbon">Tavsiya qilinadi</span>
-          <h3 id="plan-creator">Creator</h3>
-          <div class="price" data-monthly="6" data-yearly="60">
-            $6 <small>oyiga</small>
-          </div>
-          <p class="muted-note">Yangi yaratuvchilar va kichik kanallar uchun ideal.</p><ul class="features">
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span>Videolarni yuklash (maks 1 soat)</span></li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span>Asosiy analitika (views, watch time)</span></li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span>Reklamasiz ko'rinish (cheklangan)</span></li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3v18" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span>Monetizatsiya (asosiy)</span></li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3v18" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span>Brend shablonlari: cheklangan</span></li>
-          </ul>
-        </div>
+    <button onclick="showResult()">Ko‘rsatish</button>
 
-        <div class="cta">
-          <button class="btn primary" onclick="selectPlan('Creator')">Tanlash — Boshlash</button>
-          <div style="margin-left:auto;text-align:right">
-            <div class="muted-note">Eng mashhur</div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Pro -->
-      <article class="card" data-plan="pro" aria-labelledby="plan-pro">
-        <div>
-          <h3 id="plan-pro">Pro</h3>
-          <div class="price" data-monthly="18" data-yearly="180">
-            $18 <small>oyiga</small>
-          </div>
-          <p class="muted-note">Ko'proq yuklash, rivojlangan analytics va prioritet yordami bilan.</p>
-
-          <ul class="features">
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span>Videolarni yuklash (cheklanmagan uzunlik)</span></li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span>Advanced analytics (CTR, audience)</span></li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span>Full monetizatsiya & A/B testing</span></li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3v18" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span>Custom branding & priority support</span></li>
-          </ul>
-        </div>
-
-        <div class="cta">
-          <button class="btn primary" onclick="selectPlan('Pro')">Tanlash</button>
-          <button class="btn ghost" onclick="contactSales()">Kontakt</button>
-        </div>
-      </article>
-    </section>
-
-    <div class="foot">
-      <strong>Eslatma:</strong> Yillik reja 2 oy bepul (oylik qiymat * 10 = yillik qiymat). Narxlar misol uchun berilgan — valyutani o'zgartirish yoki Qo'shilgan soliqni (VAT) qo'shish mumkin.
+    <div class="result" id="result">
+      Sana va vaqt tanlanmadi
     </div>
   </div>
 
   <script>
-    (function(){
-      const monthlyBtn = document.getElementById('monthlyBtn');
-      const yearlyBtn = document.getElementById('yearlyBtn');
-      const cards = document.querySelectorAll('.card .price');
-      function setActive(isYearly){
-        monthlyBtn.classList.toggle('active', !isYearly);
-        yearlyBtn.classList.toggle('active', isYearly);
-        monthlyBtn.setAttribute('aria-pressed', String(!isYearly));
-        yearlyBtn.setAttribute('aria-pressed', String(isYearly));cards.forEach(el=>{
-          const m = Number(el.getAttribute('data-monthly') || 0);
-          const y = Number(el.getAttribute('data-yearly') || Math.round(m*10));
-          if(isYearly){
-            el.innerHTML = '$' + y + ' <small>yiliga</small>';
-          } else {
-            el.innerHTML = '$' + m + ' <small>oyiga</small>';
-          }
-        });
+    function showResult() {
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+      const result = document.getElementById("result");
+
+      if (!date || !time) {
+        result.textContent = "Iltimos sana va vaqtni tanlang";
+        return;
       }
 
-      monthlyBtn.addEventListener('click', ()=> setActive(false));
-      yearlyBtn.addEventListener('click', ()=> setActive(true));
-
-      setActive(false);
-
-      window.selectPlan = function(name){
-        alert(name + " reja tanlandi. Checkout yoki ro'yxatdan o'tish sahifasiga yo'naltirishni qo'shing.");
-      }
-      window.contactSales = function(){
-        alert("Iltimos, savdo bo'limi bilan bog'laning: sales@myvideo.example");
-      }
-    })();
+      result.textContent = `Tanlangan sana: ${date} | Vaqt: ${time}`;
+    }
   </script>
+
 </body>
 </html>
